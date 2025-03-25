@@ -6,14 +6,14 @@ package com.planit;
 import com.planit.pages.ContactPage;
 import com.planit.pages.HomePage;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class ContactPageTests extends BaseTest {
     private HomePage homePage;
     private ContactPage contactPage;
 
-    @BeforeClass
+    @BeforeMethod
     public void initPages() {
         homePage = new HomePage(driver);
         contactPage = new ContactPage(driver);
@@ -40,7 +40,8 @@ public class ContactPageTests extends BaseTest {
     }
 
     // Test Case 2: Successful form submission
-    @Test
+    // Run 5 times to ensure 100% pass rate
+    @Test(invocationCount = 5)
     public void testSuccessfulContactFormSubmission() {
         homePage.navigateToContactPage();
         contactPage.fillMandatoryFields("Jane Doe", "jane.doe@example.com", "Another test message");

@@ -4,6 +4,9 @@ package com.planit.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class ContactPage extends BasePage {
     // Locators
@@ -40,6 +43,8 @@ public class ContactPage extends BasePage {
     }
 
     public boolean isSubmissionSuccessful() {
-        return driver.findElement(successMessage).isDisplayed();
+        WebDriverWait longWait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        longWait.until(d -> driver.findElement(successMessage).isDisplayed());
+        return true;
     }
 }
