@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="PlanitAutomationSuite" parallel="false">
+    <test name="ContactPageTests">
+        <classes>
+            <class name="com.planit.tests.ContactPageTests"/>
+        </classes>
+    </test>
+    <test name="ShoppingCartTests">
+        <classes>
+            <class name="com.planit.tests.ShoppingCartTests"/>
+        </classes>
+    </test>
+</suite>
