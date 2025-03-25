@@ -13,7 +13,8 @@ public class ShopPage extends BasePage {
 
     // Add an item to cart by clicking the 'Buy' button multiple times
     public void addItemToCart(String itemName, int quantity) {
-        By itemContainer = By.xpath("//h4[contains(text(), '" + itemName + "')]/ancestor::div[contains(@class, 'product')]");
+        //By itemContainer = By.xpath("//h4[contains(text(), '" + itemName + "')]/ancestor::div[contains(@class, 'product')]");
+        By itemContainer = By.xpath("//h4[contains(text(), '" + itemName + "')]/ancestor::li");
         WebElement container = driver.findElement(itemContainer);
         WebElement buyButton = container.findElement(By.xpath(".//a[text()='Buy']"));
         for (int i = 0; i < quantity; i++) {
@@ -23,7 +24,7 @@ public class ShopPage extends BasePage {
 
     // Extract the price displayed for the given item
     public double getPriceForItem(String itemName) {
-        By priceLocator = By.xpath("//h4[contains(text(), '" + itemName + "')]/following-sibling::p[@class='price']");
+        By priceLocator = By.xpath("//h4[contains(text(), '" + itemName + "')]/following-sibling::p/span[contains(@class, 'product-price')]");
         String priceText = driver.findElement(priceLocator).getText();
         priceText = priceText.replaceAll("[^\\.\\d]", ""); // Remove non-numeric characters except decimal
         return Double.parseDouble(priceText);
@@ -31,6 +32,6 @@ public class ShopPage extends BasePage {
 
     // Navigate to the Cart page via the navbar
     public void navigateToCart() {
-        clickElement(driver.findElement(By.linkText("Cart")));
+        clickElement(driver.findElement(By.partialLinkText("Cart")));
     }
 }

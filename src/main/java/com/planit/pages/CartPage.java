@@ -9,8 +9,8 @@ import java.util.List;
 
 public class CartPage extends BasePage {
     // Locators for cart rows and total value
-    private By cartRows = By.cssSelector("table.cart tbody tr");
-    private By totalLocator = By.id("total");
+    private By cartRows = By.cssSelector("table.cart-items tbody tr");
+    private By totalLocator = By.className("total");
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -23,7 +23,7 @@ public class CartPage extends BasePage {
         List<WebElement> cells = row.findElements(By.tagName("td"));
         // Assuming columns: [Item Name, Price, Quantity, Subtotal]
         double price = Double.parseDouble(cells.get(1).getText().replace("$", "").trim());
-        int quantity = Integer.parseInt(cells.get(2).getText().trim());
+        int quantity = Integer.parseInt(cells.get(2).findElement(By.name("quantity")).getDomAttribute("value"));
         double subtotal = Double.parseDouble(cells.get(3).getText().replace("$", "").trim());
         return price == expectedPrice && subtotal == price * quantity;
     }
@@ -37,7 +37,7 @@ public class CartPage extends BasePage {
             double subtotal = Double.parseDouble(cells.get(3).getText().replace("$", "").trim());
             sum += subtotal;
         }
-        double displayedTotal = Double.parseDouble(driver.findElement(totalLocator).getText().replace("$", "").trim());
+        double displayedTotal = Double.parseDouble(driver.findElement(totalLocator).getText().replaceAll("[^\\d.]", "").trim());
         return sum == displayedTotal;
     }
 }
