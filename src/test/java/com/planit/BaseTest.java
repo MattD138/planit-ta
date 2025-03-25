@@ -8,8 +8,6 @@ import com.planit.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
-import java.time.Duration;
-
 public class BaseTest {
     protected WebDriver driver;
     protected static final String BASE_URL = ConfigReader.getProperty("base.url");
