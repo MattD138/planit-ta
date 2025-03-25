@@ -3,6 +3,7 @@
 
 package com.planit.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -19,6 +20,19 @@ public class BasePage {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
+    }
+
+    protected boolean doesElementExist(By locator) {
+        return !driver.findElements(locator).isEmpty();
+    }
+
+    protected boolean doAllElementsExist(By... locators) {
+        for (By locator : locators) {
+            if (!doesElementExist(locator)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     protected void waitForElementToBeVisible(WebElement element) {
