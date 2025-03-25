@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 public class ContactPage extends BasePage {
     // Locators
     private By submitButton = By.xpath("//a[text()='Submit']");
-    private By forenameField = By.id("email");
+    private By forenameField = By.id("forename");
     private By emailField = By.id("email");
     private By messageField = By.id("message");
     private By forenameFieldError = By.id("forename-err");
